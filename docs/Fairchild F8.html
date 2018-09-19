@@ -1,0 +1,1607 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.61 [en] (OS/2; U) [Netscape]">
+   <title>Lowell O. Turner's Home Page - Fairchild F8</title>
+</head>
+<body text="#000000" bgcolor="#00FFFF">
+
+<h1>
+Fairchild Semiconductor F8</h1>
+
+<h4>
+Introduction</h4>
+NOTES: The folowing symbols are used in this table:
+<ul>
+<li>
+aaaa Four bits representing the register addressing mode</li>
+
+<ul>
+<li>
+0000-1011 Registers 0-B directly addressed</li>
+
+<li>
+1100 ISAR addresses the register</li>
+
+<li>
+1101 ISAR addresses the register. Lower three bits of ISAR are incremented</li>
+
+<li>
+1110 ISAR addresses the register. Lower three bits of ISAR are decremented</li>
+
+<li>
+1111 NOP With this value, no operation is performed</li>
+</ul>
+
+<li>
+cc Two bits choosing a scratchpad register</li>
+
+<ul>
+<li>
+00 -- KU Scratchpad Register 12</li>
+
+<li>
+01 -- KL Scratchpad Register 13</li>
+
+<li>
+10 -- QU Scratchpad Register 14</li>
+
+<li>
+11 -- QL Scratchpad Register 15</li>
+</ul>
+
+<li>
+d One bit immediate data</li>
+
+<li>
+eeee A four bit port number</li>
+
+<li>
+QQQQ A 16 bit address</li>
+
+<li>
+RR An 8-bit signed displacement</li>
+
+<li>
+SS An 8 bit port number</li>
+</ul>
+When the "machine cycle" column contains two numbers, the first is if the
+branch is not taken the other number is if it is.
+<p>Also, the table immediately following shows flags affected by instructions.
+I forgot to add it to the "main" table.&nbsp; An X indicates the instruction
+modifies the the flag. A zero or one indicates the flag is set or reset
+when this instruction is executed.
+<table BORDER CELLSPACING=0 CELLPADDING=5 >
+<caption align=top>Fairchild F8 instruction set flag status list</caption>
+
+<tr>
+<th ALIGN=CENTER COLSPAN="5">Fairchild F8 instruction set flag status list</th>
+</tr>
+
+<tr>
+<th ALIGN=CENTER ROWSPAN="2">Mnemonic</th>
+
+<th COLSPAN="4">Flags</th>
+</tr>
+
+<tr>
+<th ALIGN=CENTER>C</th>
+
+<th ALIGN=CENTER>Z</th>
+
+<th ALIGN=CENTER>S</th>
+
+<th ALIGN=CENTER>O</th>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>AS r</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>X</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>ASD r</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>X</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>NS r</td>
+
+<td>0</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>0</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>XS r</td>
+
+<td>0</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>0</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>DS r</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>X</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>AM</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>X</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>AMD</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>X</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>NM</td>
+
+<td>0</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>0</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>OM</td>
+
+<td>0</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>0</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>XM</td>
+
+<td>0</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>0</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>CM</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>X</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>AI DATA8</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>X</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>NI DATA8</td>
+
+<td>0</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>0</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>OI DATA8</td>
+
+<td>0</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>0</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>XI DATA8</td>
+
+<td>0</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>0</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>CI DATA8</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>X</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>ADC</td>
+
+<td>0</td>
+
+<td>X</td>
+
+<td>1</td>
+
+<td>0</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>SR 4</td>
+
+<td>0</td>
+
+<td>X</td>
+
+<td>1</td>
+
+<td>0</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>SL 1</td>
+
+<td>0</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>0</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>SL 4</td>
+
+<td>0</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>0</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>COM</td>
+
+<td>0</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>0</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>LNK</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>X</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>INC</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>X</td>
+</tr>
+</table>
+
+<hr>
+<table BORDER CELLSPACING=0 CELLPADDING=5 >
+<caption align=top>Fairchild F8 opcode detail</caption>
+
+<tr>
+<th ALIGN=CENTER COLSPAN="7">Fairchild F8 opcode/mnemonic detail</th>
+</tr>
+
+<tr>
+<th ALIGN=CENTER ROWSPAN="2">Mnemonic</th>
+
+<th ROWSPAN="2">Operand</th>
+
+<th COLSPAN="2">Machine
+<br>cycles</th>
+
+<th ROWSPAN="2">Operation</th>
+
+<th COLSPAN="2" ROWSPAN="2">Op Code</th>
+</tr>
+
+<tr>
+<th ALIGN=CENTER COLSPAN="7">&nbsp;</th>
+</tr>
+
+<tr>
+<th ALIGN=CENTER COLSPAN="7">F8 I/O opcodes</th>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>INS</td>
+
+<td>P4</td>
+
+<td>4</td>
+
+<td>&nbsp;</td>
+
+<td>Input to Accumulator from I/O port</td>
+
+<td>1010eeee</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>IN</td>
+
+<td>P8</td>
+
+<td>2</td>
+
+<td>&nbsp;</td>
+
+<td>Input to Accumulator from I/O port</td>
+
+<td>26</td>
+
+<td>SS</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>OUTS</td>
+
+<td>P4</td>
+
+<td>4</td>
+
+<td>&nbsp;</td>
+
+<td>Output to I/O port from Accumulator</td>
+
+<td>1011eeee</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>OUT</td>
+
+<td>P8</td>
+
+<td>4</td>
+
+<td>&nbsp;</td>
+
+<td>Output to I/O port from Accumulator</td>
+
+<td>27</td>
+
+<td>SS</td>
+</tr>
+
+<tr>
+<th ALIGN=CENTER COLSPAN="7">F8 Primary memory reference opcodes</th>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>LM</td>
+
+<td>&nbsp;</td>
+
+<td>2.5</td>
+
+<td>&nbsp;</td>
+
+<td>Load Accumulator via DC0 and auto-increment DC0</td>
+
+<td>16</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>ST</td>
+
+<td>&nbsp;</td>
+
+<td>2.5</td>
+
+<td>&nbsp;</td>
+
+<td>Store Accumulator via DC0 and auto-increment DC0</td>
+
+<td>17</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>LR</td>
+
+<td>A,r</td>
+
+<td>1</td>
+
+<td>&nbsp;</td>
+
+<td>Load the contents of the specified register SR into Accumulator. increment
+or decrement ISAR if specified by r</td>
+
+<td>0100aaaa</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>LR</td>
+
+<td>A,DPCHR</td>
+
+<td>1</td>
+
+<td>&nbsp;</td>
+
+<td>Load Accumulator with the contents of the specified DPCHR</td>
+
+<td>000000cc</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>LR</td>
+
+<td>r,A</td>
+
+<td>1</td>
+
+<td>&nbsp;</td>
+
+<td>Load the contents of the Accumulator into the specified register. increment
+or decrement ISAR if specified by r</td>
+
+<td>0101aaaa</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>LR</td>
+
+<td>DPCHR,A</td>
+
+<td>1</td>
+
+<td>&nbsp;</td>
+
+<td>Load contents of Accumulator into the specified DPCHR</td>
+
+<td>000001cc</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>LR</td>
+
+<td>H,DC0</td>
+
+<td>4</td>
+
+<td>&nbsp;</td>
+
+<td>Load contents of Scratchpad registers 10 and 11 into DC0</td>
+
+<td>11</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>LR</td>
+
+<td>Q,DC0</td>
+
+<td>4</td>
+
+<td>&nbsp;</td>
+
+<td>Load contents of Scratchpad registers 14 and 15 into DC0</td>
+
+<td>0E</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>LR</td>
+
+<td>DC0,H</td>
+
+<td>4</td>
+
+<td>&nbsp;</td>
+
+<td>Load contents of DC0 into Scratchpad registers 10 and 11</td>
+
+<td>10</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>LR</td>
+
+<td>DC0,Q</td>
+
+<td>4</td>
+
+<td>&nbsp;</td>
+
+<td>Load contents of DC0 into Scratchpad registers 14 and 15</td>
+
+<td>0F</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>LR</td>
+
+<td>K,PC1</td>
+
+<td>4</td>
+
+<td>&nbsp;</td>
+
+<td>Load contents of Register K into the Stack register</td>
+
+<td>08</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>LR</td>
+
+<td>PC1,K</td>
+
+<td>4</td>
+
+<td>&nbsp;</td>
+
+<td>Load contents of the Stack register into Register K</td>
+
+<td>09</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>LR</td>
+
+<td>PC0,Q</td>
+
+<td>4</td>
+
+<td>&nbsp;</td>
+
+<td>Load contents of Register Q into the Program Counter</td>
+
+<td>0D</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>PK</td>
+
+<td>&nbsp;</td>
+
+<td>4</td>
+
+<td>&nbsp;</td>
+
+<td>Save contents of the Program Counter in the Stack register, then load
+the contents of Register Q into the Program Counter</td>
+
+<td>0C</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<th ALIGN=CENTER COLSPAN="7">F8 Secondary memory reference (scratchpad)
+opcodes</th>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>AS</td>
+
+<td>r</td>
+
+<td>1</td>
+
+<td>&nbsp;</td>
+
+<td>Add contents of specified register to contents of Accumulator. increment
+or decrement ISAR if specified by r</td>
+
+<td>1100aaaa</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>ASD</td>
+
+<td>r</td>
+
+<td>2</td>
+
+<td>&nbsp;</td>
+
+<td>Add as BCD contents of specified register to contents of Accumulator.
+increment or decrement ISAR if specified by r</td>
+
+<td>1101aaaa</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>NS</td>
+
+<td>r</td>
+
+<td>1</td>
+
+<td>&nbsp;</td>
+
+<td>Logical AND contents of specified register to contents of Accumulator.
+increment or decrement ISAR if specified by r</td>
+
+<td>1111aaaa</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>XS</td>
+
+<td>r</td>
+
+<td>1</td>
+
+<td>&nbsp;</td>
+
+<td>Logical XOR contents of specified register to contents of Accumulator.
+increment or decrement ISAR if specified by r</td>
+
+<td>1110aaaa</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>DS</td>
+
+<td>r</td>
+
+<td>1.5</td>
+
+<td>&nbsp;</td>
+
+<td>Decrement (by one) specified register. increment or decrement ISAR
+if specified by r</td>
+
+<td>0011aaaa</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>AM</td>
+
+<td>&nbsp;</td>
+
+<td>2.5</td>
+
+<td>&nbsp;</td>
+
+<td>Add Accumulator contents to the contents of the memory location addressed
+by DC0. Increment DC0</td>
+
+<td>88</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>AMD</td>
+
+<td>&nbsp;</td>
+
+<td>2.5</td>
+
+<td>&nbsp;</td>
+
+<td>Decimal (BCD) add Accumulator contents to the contents of the memory
+location addressed by DC0. Increment DC0</td>
+
+<td>89</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>NM</td>
+
+<td>&nbsp;</td>
+
+<td>2.5</td>
+
+<td>&nbsp;</td>
+
+<td>Logical AND Accumulator contents with the contents of the memory location
+addressed by DC0. Increment DC0</td>
+
+<td>8A</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>OM</td>
+
+<td>&nbsp;</td>
+
+<td>2.5</td>
+
+<td>&nbsp;</td>
+
+<td>Logical OR Accumulator contents with the contents of the memory location
+addressed by DC0. Increment DC0</td>
+
+<td>8B</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>XM</td>
+
+<td>&nbsp;</td>
+
+<td>2.5</td>
+
+<td>&nbsp;</td>
+
+<td>Logical XOR Accumulator contents with the contents of the memory location
+addressed by DC0. Increment DC0</td>
+
+<td>8C</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>CM</td>
+
+<td>&nbsp;</td>
+
+<td>2.5</td>
+
+<td>&nbsp;</td>
+
+<td>Subtract the contents of Accumulator from contents of memory location
+addressed by DC0. Only the status flags are affected. Increment DC0.</td>
+
+<td>8D</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<th ALIGN=CENTER COLSPAN="7">F8 Immediate opcodes</th>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>LISU</td>
+
+<td>DATA3</td>
+
+<td>1</td>
+
+<td>&nbsp;</td>
+
+<td>Load immediate into the upper 3 bits of ISAR</td>
+
+<td>01100ddd</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>LISL</td>
+
+<td>DATA3</td>
+
+<td>1</td>
+
+<td>&nbsp;</td>
+
+<td>Load immediate into the lower 3 bits of ISAR</td>
+
+<td>01101ddd</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>DCI</td>
+
+<td>ADDR</td>
+
+<td>6</td>
+
+<td>&nbsp;</td>
+
+<td>Load immediate data into the DC0</td>
+
+<td>2A</td>
+
+<td>QQQQ</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>LIS</td>
+
+<td>DATA4</td>
+
+<td>1</td>
+
+<td>&nbsp;</td>
+
+<td>Load immediate data into the lower four bits of Accumulator and clear
+upper four Accumulator bits</td>
+
+<td>0111dddd</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>LI</td>
+
+<td>DATA8</td>
+
+<td>2.5</td>
+
+<td>&nbsp;</td>
+
+<td>Load immediate data into Accumulator</td>
+
+<td>20</td>
+
+<td>YY</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>AI</td>
+
+<td>DATA8</td>
+
+<td>2.5</td>
+
+<td>&nbsp;</td>
+
+<td>Add immediate to Accumulator</td>
+
+<td>24</td>
+
+<td>YY</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>NI</td>
+
+<td>DATA8</td>
+
+<td>2.5</td>
+
+<td>&nbsp;</td>
+
+<td>Logical AND immediate to Accumulator</td>
+
+<td>21</td>
+
+<td>YY</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>OI</td>
+
+<td>DATA8</td>
+
+<td>2.5</td>
+
+<td>&nbsp;</td>
+
+<td>Logical OR immediate to Accumulator</td>
+
+<td>22</td>
+
+<td>YY</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>XI</td>
+
+<td>DATA8</td>
+
+<td>2.5</td>
+
+<td>&nbsp;</td>
+
+<td>Logical XOR immediate to Accumulator</td>
+
+<td>23</td>
+
+<td>YY</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>CI</td>
+
+<td>DATA8</td>
+
+<td>2.5</td>
+
+<td>&nbsp;</td>
+
+<td>Compare Immediate. subtract Accumulator contents from immediate data.
+Only the status flags are affected.</td>
+
+<td>25</td>
+
+<td>YY</td>
+</tr>
+
+<tr>
+<th ALIGN=CENTER COLSPAN="7">F8 jump opcodes</th>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>PI</td>
+
+<td>ADDR</td>
+
+<td>6.5</td>
+
+<td>&nbsp;</td>
+
+<td>Save Program Counter in Stack register. Load immediate address into
+Program Counter</td>
+
+<td>28</td>
+
+<td>QQQQ</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>BR</td>
+
+<td>DISP</td>
+
+<td>3.5</td>
+
+<td>&nbsp;</td>
+
+<td>Add immediate displacement to contents of Program Counter</td>
+
+<td>90</td>
+
+<td>RR</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>JMP</td>
+
+<td>ADDR</td>
+
+<td>5.5</td>
+
+<td>&nbsp;</td>
+
+<td>Load immediate address into Program Counter. Load high order byte of
+address into Accumulator</td>
+
+<td>29</td>
+
+<td>QQQQ</td>
+</tr>
+
+<tr>
+<th ALIGN=CENTER COLSPAN="7">F8 conditional branch opcode</th>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>BT</td>
+
+<td>DATA3,DISP</td>
+
+<td>3</td>
+
+<td>3.5</td>
+
+<td>Logical OR 3 immediate bits with current TMASK. If any bit=0, add displacement
+to PC0</td>
+
+<td>10000ddd</td>
+
+<td>RR</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>BF</td>
+
+<td>DATA4,DISP</td>
+
+<td>3</td>
+
+<td>3.5</td>
+
+<td>If 4 immediate bits=FMASK, add displacement to PC0</td>
+
+<td>1001dddd</td>
+
+<td>RR</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>BP</td>
+
+<td>DISP</td>
+
+<td>3</td>
+
+<td>3.5</td>
+
+<td>Branch relative if sign bit = 1.</td>
+
+<td>81</td>
+
+<td>RR</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>BC</td>
+
+<td>DISP</td>
+
+<td>3</td>
+
+<td>3.5</td>
+
+<td>Branch relative if carry bit = 1.</td>
+
+<td>82</td>
+
+<td>RR</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>BZ</td>
+
+<td>DISP</td>
+
+<td>3</td>
+
+<td>3.5</td>
+
+<td>Branch relative if zero bit = 1.</td>
+
+<td>84</td>
+
+<td>RR</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>BM</td>
+
+<td>DISP</td>
+
+<td>3</td>
+
+<td>3.5</td>
+
+<td>Branch relative if sign bit = 0.</td>
+
+<td>91</td>
+
+<td>RR</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>BNC</td>
+
+<td>DISP</td>
+
+<td>3</td>
+
+<td>3.5</td>
+
+<td>Branch relative if carry bit = 0.</td>
+
+<td>92</td>
+
+<td>RR</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>BNZ</td>
+
+<td>DISP</td>
+
+<td>3</td>
+
+<td>3.5</td>
+
+<td>Branch relative if zero bit = 0.</td>
+
+<td>94</td>
+
+<td>RR</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>BNO</td>
+
+<td>DISP</td>
+
+<td>3</td>
+
+<td>3.5</td>
+
+<td>Branch relative if overflow bit = 0.</td>
+
+<td>98</td>
+
+<td>RR</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>BR7</td>
+
+<td>DISP</td>
+
+<td>3</td>
+
+<td>3.5</td>
+
+<td>Branch relative if three low bits of ISAR not = 111.</td>
+
+<td>8F</td>
+
+<td>RR</td>
+</tr>
+
+<tr>
+<th ALIGN=CENTER COLSPAN="7">F8 register to register move opcodes</th>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>XDC</td>
+
+<td>&nbsp;</td>
+
+<td>2</td>
+
+<td>&nbsp;</td>
+
+<td>Exchange the contents of DC0 and DC1</td>
+
+<td>2C</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>LR</td>
+
+<td>A,IS</td>
+
+<td>1</td>
+
+<td>&nbsp;</td>
+
+<td>Load the contents of ISAR into the Accumulator</td>
+
+<td>0A</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>LR</td>
+
+<td>IS,A</td>
+
+<td>1</td>
+
+<td>&nbsp;</td>
+
+<td>Load the contents of the Accumulator into ISAR</td>
+
+<td>0B</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>POP</td>
+
+<td>&nbsp;</td>
+
+<td>2</td>
+
+<td>&nbsp;</td>
+
+<td>Load contents of stack register into the Program Counter</td>
+
+<td>1C</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<th ALIGN=CENTER COLSPAN="7">F8 register to register operate opcode</th>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>ADC</td>
+
+<td>&nbsp;</td>
+
+<td>2.5</td>
+
+<td>&nbsp;</td>
+
+<td>Add contents of DC0 to Accumulator, which is treated as a signed binary
+number. Store the result in DC0</td>
+
+<td>8E</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<th ALIGN=CENTER COLSPAN="7">F8 register operate opcode</th>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>SR</td>
+
+<td>1</td>
+
+<td>1</td>
+
+<td>&nbsp;</td>
+
+<td>Accumulator shift right. most significant bit is 0</td>
+
+<td>12</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>SR</td>
+
+<td>4</td>
+
+<td>1</td>
+
+<td>&nbsp;</td>
+
+<td>Accumulator shift right by 4 bits. most significant 4 bits = 0000</td>
+
+<td>14</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>SL</td>
+
+<td>1</td>
+
+<td>1</td>
+
+<td>&nbsp;</td>
+
+<td>Accumulator shift left. least significant bit is 0</td>
+
+<td>13</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>SL</td>
+
+<td>4</td>
+
+<td>1</td>
+
+<td>&nbsp;</td>
+
+<td>Accumulator shift left by 4 bits. least significant 4 bits = 0000</td>
+
+<td>15</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>COM</td>
+
+<td>&nbsp;</td>
+
+<td>1</td>
+
+<td>&nbsp;</td>
+
+<td>Complement Accumulator contents.</td>
+
+<td>18</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>LNK</td>
+
+<td>&nbsp;</td>
+
+<td>1</td>
+
+<td>&nbsp;</td>
+
+<td>Add the carry to the contents of Accumulator.</td>
+
+<td>19</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>INC</td>
+
+<td>&nbsp;</td>
+
+<td>1</td>
+
+<td>&nbsp;</td>
+
+<td>Increment the contents of Accumulator.</td>
+
+<td>1F</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>CLR</td>
+
+<td>&nbsp;</td>
+
+<td>1</td>
+
+<td>&nbsp;</td>
+
+<td>Clear the contents of Accumulator.</td>
+
+<td>70</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<th ALIGN=CENTER COLSPAN="7">F8 interrupt opcodes</th>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>DI</td>
+
+<td>&nbsp;</td>
+
+<td>2</td>
+
+<td>&nbsp;</td>
+
+<td>Set interrupt enable bit in the Status register, W = 0</td>
+
+<td>1A</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>EI</td>
+
+<td>&nbsp;</td>
+
+<td>2</td>
+
+<td>&nbsp;</td>
+
+<td>Set interrupt enable bit in the Status register, W = 1</td>
+
+<td>1B</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<th ALIGN=CENTER COLSPAN="7">F8 status register opcodes</th>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>LR</td>
+
+<td>W,J</td>
+
+<td>2</td>
+
+<td>&nbsp;</td>
+
+<td>Move the contents of Scratchpad register 9 into the status register
+W.</td>
+
+<td>1D</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>LR</td>
+
+<td>J,W</td>
+
+<td>1</td>
+
+<td>&nbsp;</td>
+
+<td>Move the contents of status register W into the Scratchpad register
+9.</td>
+
+<td>1E</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<th ALIGN=CENTER COLSPAN="7">F8 misc opcode</th>
+</tr>
+
+<tr ALIGN=CENTER>
+<td>NOP</td>
+
+<td>&nbsp;</td>
+
+<td>1</td>
+
+<td>&nbsp;</td>
+
+<td>No Operation - A.K.A cycle waster</td>
+
+<td>2B</td>
+
+<td>&nbsp;</td>
+</tr>
+</table>
+
+<hr>
+<h2>
+<a NAME="colophon"></a>Colophon</h2>
+
+<ul><img SRC="images/reddot.jpg" > last modified 08JUL02
+<p><img SRC="images/reddot.jpg" > this home page is maintained by <a href="http://www.nyx.net/~lturner/index.html">Lowell
+O. Turner</a>.
+<p><img SRC="images/mailbox1.jpg" > Please email <a href="mailto:lowell.turner@ieee.org">lowell.turner@ieee.org</a>
+with comments and corrections.</ul>
+<b>Disclaimer: This document in no way represents Nyx. All opinions and
+errors are mine alone.</b>
+<address>
+lowell.turner@ieee.org</address>
+
+</body>
+</html>
