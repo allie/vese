@@ -18,11 +18,11 @@ func NewProgram(data []byte) *Program {
 
 // Read one byte at the program counter, then increment the program counter
 func (p *Program) ReadByte() (byte, error) {
-	if p.Pc >= len(p.data) {
+	if int(p.Pc) >= len(p.data) {
 		return 0, errors.New("Program data buffer is empty")
 	}
 
-	val := data[p.Pc]
+	val := p.data[p.Pc]
 	p.Pc++
 
 	return val, nil
@@ -30,7 +30,7 @@ func (p *Program) ReadByte() (byte, error) {
 
 // Move the program counter to the specified address
 func (p *Program) Seek(address uint16) error {
-	if address >= len(p.data) {
+	if int(address) >= len(p.data) {
 		return errors.New("Address out of bounds")
 	}
 

@@ -7,6 +7,7 @@ type CPU struct {
 	status     StatusFlags
 	opcode     byte
 	running    bool
+	cycles     int
 	vram       *VRAM
 	program    *Program
 }
@@ -24,7 +25,7 @@ type StatusFlags struct {
 	sign     bool
 }
 
-type Scratchpad = [64]byte
+type Scratchpad [64]byte
 
 func NewCPU() *CPU {
 	c := new(CPU)
@@ -273,10 +274,13 @@ func (c *CPU) performInstruction(opcode byte) int {
 // Perform one logical CPU step
 func (c *CPU) Step() {
 	// Fetch an opcode
-	c.opcode = c.Program.ReadByte()
+	var err error
+	c.opcode, err = c.program.ReadByte()
 
-	// Execute the instruction
-	c.cycles += performInstruction(c.opcode)
+	if err != nil {
+		// Execute the instruction
+		c.cycles += c.performInstruction(c.opcode)
+	}
 
 	// TODO: Interrupts etc
 }
@@ -293,41 +297,41 @@ func (c *CPU) Execute(program []byte) {
 }
 
 // Get ISAR hi and lo as one packed value
-func (i ISAR) Pack() byte {
+func (i *ISAR) Pack() byte {
 	// TODO
 	return 0
 }
 
 // Set ISAR hi and lo from one packed value
-func (i ISAR) Unpack(val byte) {
+func (i *ISAR) Unpack(val byte) {
 	// TODO
 }
 
 // Get status flags as one packed value
-func (s StatusFlags) Pack() byte {
+func (s *StatusFlags) Pack() byte {
 	// TODO
 	return 0
 }
 
 // Set status flags from one packed value
-func (s StatusFlags) Unpack(val byte) {
+func (s *StatusFlags) Unpack(val byte) {
 	// TODO
 }
 
 // Enable a particular flag
-func (s StatusFlag) Set(flag int) {
+func (s *StatusFlags) Set(flag int) {
 
 }
 
 // Clear a particular flag
-func (s StatusFlag) Clear(flag int) {
+func (s *StatusFlags) Clear(flag int) {
 
 }
 
 // Set status flags as one packed value
 
 // Clear all scratchpad registers
-func (s Scratchpad) Clear() {
+func (s *Scratchpad) Clear() {
 	for i := 0; i < len(s); i++ {
 		s[i] = 0
 	}
