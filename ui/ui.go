@@ -5,7 +5,7 @@ import (
 )
 
 type Ui struct {
-	video   *video
+	video   *Video
 	running bool
 	last    uint64
 	now     uint64
@@ -19,7 +19,7 @@ func NewUi() *Ui {
 		panic(err)
 	}
 
-	u.video = newVideo()
+	u.video = NewVideo()
 	return u
 }
 
@@ -42,11 +42,11 @@ func (u *Ui) Run() {
 			}
 		}
 
-		u.video.render(u.dt)
+		u.video.Render(u.dt)
 	}
 }
 
 func (u *Ui) Quit() {
-	u.video.destroy()
+	u.video.Destroy()
 	sdl.Quit()
 }

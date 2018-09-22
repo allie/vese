@@ -10,6 +10,6 @@ func NewVES() *VES {
 	return v
 }
 
-func (v *VES) Emulate(program []byte) {
-	v.cpu.Execute(program)
+func (v *VES) Emulate(program *Cartridge) {
+	v.cpu.Execute(program.Data)
 }

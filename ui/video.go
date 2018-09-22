@@ -5,7 +5,7 @@ import (
 	"github.com/veandco/go-sdl2/sdl"
 )
 
-type video struct {
+type Video struct {
 	window   *sdl.Window
 	renderer *sdl.Renderer
 	windowX  int32
@@ -15,8 +15,8 @@ type video struct {
 	title    string
 }
 
-func newVideo() *video {
-	v := new(video)
+func NewVideo() *Video {
+	v := new(Video)
 
 	v.title = "vese"
 
@@ -45,7 +45,7 @@ func newVideo() *video {
 	return v
 }
 
-func (v *video) render(dt float64) {
+func (v *Video) Render(dt float64) {
 	dt = dt
 	v.renderer.SetDrawColor(0, 0, 0, 255)
 	v.renderer.Clear()
@@ -57,7 +57,7 @@ func (v *video) render(dt float64) {
 	v.renderer.Present()
 }
 
-func (v *video) destroy() {
+func (v *Video) Destroy() {
 	v.renderer.Destroy()
 	v.window.Destroy()
 }
